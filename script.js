@@ -58,7 +58,7 @@ function efectoHabilidades() {
 
 function descargarCV() {
     // Reemplaza esta URL con la ruta correcta a tu archivo CV
-    var pdfUrl = 'ruta/a/tu/Natali_Vilatuna_CV.pdf';
+    var pdfUrl = 'Natali_Vilatuna_CV.pdf';
     
     // Crea un elemento <a> temporal
     var link = document.createElement('a');
