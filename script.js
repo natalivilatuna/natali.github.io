@@ -1,29 +1,34 @@
+// Variables globales
 let menuVisible = false;
-//Función que oculta o muestra el menu
-function mostrarOcultarMenu(){
-    if(menuVisible){
-        document.getElementById("nav").classList ="";
+let proyectoActual = 0;
+const proyectos = document.querySelectorAll('.carrusel-item');
+const totalProyectos = proyectos.length;
+
+// Función que oculta o muestra el menu
+function mostrarOcultarMenu() {
+    if (menuVisible) {
+        document.getElementById("nav").classList = "";
         menuVisible = false;
-    }else{
-        document.getElementById("nav").classList ="responsive";
+    } else {
+        document.getElementById("nav").classList = "responsive";
         menuVisible = true;
     }
 }
 
-function seleccionar(){
-    //oculto el menu una vez que selecciono una opcion
+function seleccionar() {
+    // Oculto el menu una vez que selecciono una opcion
     document.getElementById("nav").classList = "";
     menuVisible = false;
 }
 
-//Funcion que aplica las animaciones de las habilidades
-function efectoHabilidades(){
+// Función que aplica las animaciones de las habilidades
+function efectoHabilidades() {
     var skills = document.getElementById("skills");
     var idiomas = document.getElementById("idiomas");
     var distancia_skills = window.innerHeight - skills.getBoundingClientRect().top;
     var distancia_idiomas = window.innerHeight - idiomas.getBoundingClientRect().top;
 
-    if(distancia_skills >= 300){
+    if (distancia_skills >= 300) {
         let habilidades = document.getElementsByClassName("progreso");
         habilidades[0].classList.add("matlab");
         habilidades[1].classList.add("python");
@@ -43,23 +48,24 @@ function efectoHabilidades(){
         habilidades[15].classList.add("proyect");
     }
 
-    if(distancia_idiomas >= 300){
+    if (distancia_idiomas >= 300) {
         let habilidades_idiomas = document.querySelectorAll("#idiomas .progreso");
         habilidades_idiomas[0].classList.add("ingles");
         habilidades_idiomas[1].classList.add("espanol");
         habilidades_idiomas[2].classList.add("frances");
     }
 }
+
 function descargarCV() {
     // Reemplaza 'ruta/al/curriculum.pdf' con la ruta real a tu archivo PDF
-    var pdfUrl = 'ruta/al/curriculum.pdf';
+    var pdfUrl = 'file:///D:/des/PAPELES_TRABAJO/Hipster_CV.pdf';
     
     // Crea un elemento <a> temporal
     var link = document.createElement('a');
     link.href = pdfUrl;
     
     // Establece el nombre del archivo para la descarga
-    link.download = 'file:///D:/des/PAPELES_TRABAJO/Hipster_CV.pdf';
+    link.download = 'Natali_Vilatuna_CV.pdf';
     
     // Añade el enlace al documento y simula un clic
     document.body.appendChild(link);
@@ -67,9 +73,39 @@ function descargarCV() {
     
     // Limpia el elemento creado
     document.body.removeChild(link);
-  }
-  
-//detecto el scrolling para aplicar la animacion de la barra de habilidades
-window.onscroll = function(){
+}
+
+// Funciones para el carrusel de proyectos
+function mostrarProyecto(indice) {
+    if (indice < 0) {
+        proyectoActual = totalProyectos - 1;
+    } else if (indice >= totalProyectos) {
+        proyectoActual = 0;
+    } else {
+        proyectoActual = indice;
+    }
+
+    const desplazamiento = -proyectoActual * 100;
+    document.querySelector('.carrusel-interno').style.transform = `translateX(${desplazamiento}%)`;
+}
+
+// Event Listeners
+window.onscroll = function() {
     efectoHabilidades();
 }
+
+document.querySelector('.carrusel-control.prev').addEventListener('click', () => {
+    mostrarProyecto(proyectoActual - 1);
+});
+
+document.querySelector('.carrusel-control.next').addEventListener('click', () => {
+    mostrarProyecto(proyectoActual + 1);
+});
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Opcional: Avance automático del carrusel
+    setInterval(() => {
+        mostrarProyecto(proyectoActual + 1);
+    }, 5000); // Cambia de proyecto cada 5 segundos
+});
