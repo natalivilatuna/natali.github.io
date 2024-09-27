@@ -58,7 +58,7 @@ function efectoHabilidades() {
 
 function descargarCV() {
     // Reemplaza esta URL con la ruta correcta a tu archivo CV
-    var pdfUrl = 'ruta/a/tu/Natali_Vilatuna_CV.pdf';
+    var pdfUrl = 'Natali_Vilatuna_CV.pdf';
     
     // Crea un elemento <a> temporal
     var link = document.createElement('a');
@@ -92,45 +92,6 @@ function mostrarProyecto(indice) {
 
     const desplazamiento = -proyectoActual * 100;
     document.querySelector('.carrusel-interno').style.transform = `translateX(${desplazamiento}%)`;
-}
-
-// Manejo del formulario de contacto
-document.getElementById('formulario-contacto').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    var form = event.target;
-    var data = new FormData(form);
-
-    fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            mostrarMensaje('¡Gracias por tu mensaje! Te responderé pronto.', 'exito');
-            form.reset();
-            // Opcional: desplazarse al mensaje
-            document.getElementById('mensaje-respuesta').scrollIntoView({ behavior: 'smooth' });
-        } else {
-            mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
-        }
-    }).catch(error => {
-        mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
-    });
-});
-
-function mostrarMensaje(mensaje, tipo) {
-    var mensajeElement = document.getElementById('mensaje-respuesta');
-    mensajeElement.textContent = mensaje;
-    mensajeElement.className = 'mensaje-respuesta mensaje-' + tipo;
-    mensajeElement.style.display = 'block';
-    
-    // Ocultar el mensaje después de 5 segundos
-    setTimeout(() => {
-        mensajeElement.style.display = 'none';
-    }, 5000);
 }
 
 // Event Listeners
