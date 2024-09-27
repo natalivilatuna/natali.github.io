@@ -95,42 +95,20 @@ function mostrarProyecto(indice) {
 }
 
 // Manejo del formulario de contacto
-document.getElementById('formulario-contacto').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    var form = event.target;
-    var data = new FormData(form);
-
-    fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            mostrarMensaje('¡Gracias por tu mensaje! Te responderé pronto.', 'exito');
-            form.reset();
-            // Opcional: desplazarse al mensaje
-            document.getElementById('mensaje-respuesta').scrollIntoView({ behavior: 'smooth' });
-        } else {
-            mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
-        }
-    }).catch(error => {
-        mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
-    });
-});
-
 function mostrarMensaje(mensaje, tipo) {
     var mensajeElement = document.getElementById('mensaje-respuesta');
-    mensajeElement.textContent = mensaje;
-    mensajeElement.className = 'mensaje-respuesta mensaje-' + tipo;
-    mensajeElement.style.display = 'block';
-    
-    // Ocultar el mensaje después de 5 segundos
-    setTimeout(() => {
-        mensajeElement.style.display = 'none';
-    }, 5000);
+    if (mensajeElement) {
+        mensajeElement.textContent = mensaje;
+        mensajeElement.className = 'mensaje-respuesta mensaje-' + tipo;
+        mensajeElement.style.display = 'block';
+        
+        // Ocultar el mensaje después de 5 segundos
+        setTimeout(() => {
+            mensajeElement.style.display = 'none';
+        }, 5000);
+    } else {
+        console.error('El elemento para mostrar mensajes no se encontró en el DOM');
+    }
 }
 
 // Event Listeners
@@ -138,16 +116,55 @@ window.onscroll = function() {
     efectoHabilidades();
 }
 
-document.querySelector('.carrusel-control.prev').addEventListener('click', () => {
-    mostrarProyecto(proyectoActual - 1);
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const prevButton = document.querySelector('.carrusel-control.prev');
+    const nextButton = document.querySelector('.carrusel-control.next');
+    
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            mostrarProyecto(proyectoActual - 1);
+        });
+    }
+    
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            mostrarProyecto(proyectoActual + 1);
+        });
+    }
 
-document.querySelector('.carrusel-control.next').addEventListener('click', () => {
-    mostrarProyecto(proyectoActual + 1);
-});
+    // Manejo del formulario de contacto
+    const formulario = document.getElementById('formulario-contacto');
+    if (formulario) {
+        formulario.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-// Inicialización
-document.addEventListener('DOMContentLoaded', (event) => {
+            var form = event.target;
+            var data = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    mostrarMensaje('¡Gracias por tu mensaje! Te responderé pronto.', 'exito');
+                    form.reset();
+                    // Opcional: desplazarse al mensaje
+                    document.getElementById('mensaje-respuesta').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
+            });
+        });
+    } else {
+        console.error('El formulario de contacto no se encontró en el DOM');
+    }
+
     // Opcional: Avance automático del carrusel
     setInterval(() => {
         mostrarProyecto(proyectoActual + 1);
