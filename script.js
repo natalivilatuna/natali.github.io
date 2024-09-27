@@ -58,7 +58,7 @@ function efectoHabilidades() {
 
 function descargarCV() {
     // Reemplaza esta URL con la ruta correcta a tu archivo CV
-    var pdfUrl = 'Natali_Vilatuna_CV.pdf';
+    var pdfUrl = 'ruta/a/tu/Natali_Vilatuna_CV.pdf';
     
     // Crea un elemento <a> temporal
     var link = document.createElement('a');
@@ -109,8 +109,10 @@ document.getElementById('formulario-contacto').addEventListener('submit', functi
         }
     }).then(response => {
         if (response.ok) {
-            mostrarMensaje('¡Gracias por tu mensaje! Te responderemos pronto.', 'exito');
+            mostrarMensaje('¡Gracias por tu mensaje! Te responderé pronto.', 'exito');
             form.reset();
+            // Opcional: desplazarse al mensaje
+            document.getElementById('mensaje-respuesta').scrollIntoView({ behavior: 'smooth' });
         } else {
             mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
         }
