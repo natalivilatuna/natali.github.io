@@ -490,20 +490,22 @@
             <div class="fila">
                 <!-- Formulario -->
                 <div class="col">
-                    <form id="formulario-contacto" action="https://formsubmit.co/natalivilatuna39@gmail.com" method="POST"></form>
-                    <input type="text" name="nombre" placeholder="Tú Nombre" required>
-                    <input type="tel" name="telefono" placeholder="Número telefónico">
-                    <input type="email" name="email" placeholder="Dirección de correo" required>
-                    <input type="text" name="tema" placeholder="Tema">
-                    <textarea name="mensaje" cols="30" rows="10" placeholder="Mensaje" required></textarea>
-                    <!-- Campos ocultos para configuración adicional -->
-                    <input type="hidden" name="_subject" value="Nuevo mensaje de contacto de tu sitio web">
-                    <input type="hidden" name="_captcha" value="false">
-                    <button type="submit">
-                        Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
-                        <span class="overlay"></span>
-                    </button>
-                </form>
+                    <form id="formulario-contacto" action="https://formsubmit.co/natalivilatuna39@gmail.com" method="POST">
+                        <input type="text" name="nombre" placeholder="Tú Nombre" required>
+                        <input type="tel" name="telefono" placeholder="Número telefónico">
+                        <input type="email" name="email" placeholder="Dirección de correo" required>
+                        <input type="text" name="tema" placeholder="Tema">
+                        <textarea name="mensaje" cols="30" rows="10" placeholder="Mensaje" required></textarea>
+                        <!-- Campos ocultos para configuración adicional -->
+                        <input type="hidden" name="_subject" value="Nuevo mensaje de contacto de tu sitio web">
+                        <input type="hidden" name="_captcha" value="false">
+                        <button type="submit">
+                            Enviar Mensaje<i class="fa-solid fa-paper-plane"></i>
+                            <span class="overlay"></span>
+                        </button>
+                    </form>
+                    <!-- Elemento para mostrar mensajes de respuesta -->
+                    <div id="mensaje-respuesta" class="mensaje-respuesta"></div>
                 </div>
                 
                 <!-- Mapa -->
