@@ -112,16 +112,10 @@ document.getElementById('formulario-contacto').addEventListener('submit', functi
             mostrarMensaje('¡Gracias por tu mensaje! Te responderemos pronto.', 'exito');
             form.reset();
         } else {
-            response.json().then(data => {
-                if (Object.hasOwn(data, 'errors')) {
-                    mostrarMensaje(data["errors"].map(error => error["message"]).join(", "), 'error');
-                } else {
-                    mostrarMensaje("Oops! Hubo un problema al enviar tu formulario", 'error');
-                }
-            })
+            mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
         }
     }).catch(error => {
-        mostrarMensaje("Oops! Hubo un problema al enviar tu formulario", 'error');
+        mostrarMensaje("Oops! Hubo un problema al enviar tu formulario. Por favor, inténtalo de nuevo.", 'error');
     });
 });
 
