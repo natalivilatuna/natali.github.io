@@ -168,5 +168,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Opcional: Avance automático del carrusel
     setInterval(() => {
         mostrarProyecto(proyectoActual + 1);
-    }, 5000); // Cambia de proyecto cada 5 segundos
+    }, 10000); // Cambia de proyecto cada 5 segundos
 });
