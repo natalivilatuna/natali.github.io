@@ -485,7 +485,7 @@ html{
 
 @keyframes ingles { 0% { width: 0%; } 100% { width: 80%; } } /* B2 */
 @keyframes espanol { 0% { width: 0%; } 100% { width: 100%; } } /* Nativo */
-@keyframes frances { 0% { width: 0%; } 100% { width: 40%; } } /* A2 */
+@keyframes frances { 0% { width: 0%; } 100% { width: 10%; } } /* A0 */
 /* SECCION CURRICULUM */
 .curriculum{
     background-color: #252A2E;
